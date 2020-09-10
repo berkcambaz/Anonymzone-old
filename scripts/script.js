@@ -70,8 +70,8 @@ function post() {
                     document.getElementById("post_title").value,
                     document.getElementById("post_content").value,
                     0,
-                    false,
-                    false
+                    false,  // TODO: Fix
+                    false   // TODO: Fix
                 ];
 
                 document.getElementById("post_title").value = "";
@@ -85,6 +85,32 @@ function post() {
     ajax.send();
 }
 
+function getPost() {
+    let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            console.log(this.responseText);
+            let response = this.responseText.split("&");
+            let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
+            for (let i = 0; i < responseLength; i += 6) {   // 6 -> number of properties of a post
+                let post = [
+                    response[i + 1],
+                    response[i],
+                    response[i + 2],
+                    response[i + 3],
+                    response[i + 4],
+                    response[i + 5],
+                    false,  // TODO: Fix
+                    false   // TODO: Fix
+                ];
+                injectPost(post);
+            }
+        }
+    };
+    ajax.open("GET", "../services/getpost.php", true);
+    ajax.send();
+}
+
 /**
  * 
  * @param {string} page 
@@ -92,6 +118,9 @@ function post() {
 function changePage(page) {
     window.location.hash = page;
 }
+
+// Request posts when the page is fully loaded
+document.addEventListener("DOMContentLoaded", () => { getPost(); }, false);
 
 /*
 function applyPasteRestrict() {

@@ -106,9 +106,9 @@ if (empty($_SESSION["username"])) {
     </div>
 
     <!-- Load scripts -->
-    <script src="scripts/loader/injector.js" type="text/javascript"></script>
     <script src="scripts/script.js" type="text/javascript"></script>
     <script src="scripts/util.js" type="text/javascript"></script>
+    <script src="scripts/loader/injector.js" type="text/javascript"></script>
     <script src="scripts/spa/route.js" type="text/javascript"></script>
     <script src="scripts/spa/router.js" type="text/javascript"></script>
     <script src="scripts/spa/app.js" type="text/javascript"></script>
