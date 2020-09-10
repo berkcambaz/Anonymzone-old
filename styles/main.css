@@ -1,0 +1,335 @@
+html, body {
+    max-width: 1080px;
+    height: 100vh;
+
+    margin: auto;
+    padding: 0;
+    outline: 0;
+
+    background-color: #ffffff;
+    font-family: "ubunturegular";
+    font-size: 16px;
+
+    display: flex;  
+}
+
+@font-face {
+    font-family: 'ubunturegular';
+    font-weight: normal;
+    font-style: normal;
+    src: local("ubuntu"), url('fonts/ubuntu-r-webfont.eot');
+    src: local("ubuntu"), url('fonts/ubuntu-r-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ubuntu-r-webfont.woff2') format('woff2'),
+         url('fonts/ubuntu-r-webfont.woff') format('woff'),
+         url('fonts/ubuntu-r-webfont.ttf') format('truetype'),
+         url('fonts/ubuntu-r-webfont.svg#ubunturegular') format('svg');
+}
+
+.wrap_text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.side_bar {
+    min-width: 190px; /* -15px * 2px */
+    max-width: 190px; /* -15px * 2px */
+    height: 100vh;
+    padding: 0 15px;
+    position: fixed;
+}
+
+.side_bar_right {
+    margin-left: 860px;
+}
+
+.side_bar_item {
+    list-style-type: none;
+
+    display: block;
+    padding: 15px 0;
+    font-size: 22px;
+    color: #000000;
+}
+
+.side_bar_item_container {
+    border-radius: 50px;
+    padding: 5px 7.5px;
+    margin: 0 -7.5px;
+
+    transition-duration: 150ms;
+}
+
+.side_bar_item_text {
+    display: inline;
+}
+
+.side_bar_item_list {
+    padding: 0;
+}
+
+.side_bar_item:hover {
+    color: rgb(43, 166, 197);
+    cursor: pointer;
+}
+
+.side_bar_item-active {
+    color: rgb(43, 166, 197);
+}
+
+.side_bar_item:hover > .side_bar_item_container {
+    background-color: rgba(0, 255, 255, 0.15);
+}
+
+.profile_info_box {
+    display: block;
+    padding: 7.5px 0;
+}
+
+.profile_info {
+    list-style-type: none;
+    padding: 0;
+}
+
+.profile_info_text {
+    padding: 3.75px 0;
+}
+
+.trending_posts {
+    list-style-type: none;
+    padding: 20px 0;
+}
+
+.trending_post {
+    padding: 10px 0;
+}
+
+.side_bar_bottom {
+    list-style: none;   
+    padding: 20px 0;
+}
+
+.side_bar_bottom_element {
+    display: inline-block;
+    padding: 0 2px;
+    color: black;
+}
+
+.side_bar_bottom_element:hover {
+    color: rgb(43, 166, 197);
+    cursor: pointer;
+}
+ 
+.input_text {
+    width: 100%;
+
+    resize: none;
+    color: #000000;
+    overflow-wrap: break-word;
+
+    font-family: "ubunturegular";   /* Because by default, textarea has a different font-family */
+
+    /* Reset default properties of text input */
+    outline: 0;
+    border: 0;
+
+    font-size: 16px;
+}
+
+.main_content { 
+    width: calc(100vw - 440px); /* 440px = 220px * 2px */
+    margin: 0 220px;
+}
+
+.placeholder {
+    color: rgba(55, 55, 55, 0.25);
+}
+
+.wrap_text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.no_select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+*:focus {
+    outline: none;
+}
+
+div {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.page_header {
+    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+    margin-top: 10px;
+    font-size: 20px;
+    text-transform: capitalize;
+}
+
+.post_container {
+    padding: 5px;
+}
+
+.post {
+    padding: 5px;
+    border-bottom: 1px solid rgba(95, 24, 24, 0.25);
+}
+
+.post_create {
+    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+}
+
+.post_content_header {
+    display: block;
+    margin-top: 5px;
+}
+
+.post_username {
+    font-size: 18px;
+    display: inline-block;
+    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+    cursor: pointer;
+}
+
+.post_userinfo {
+    position: absolute;
+    background-color: rgb(43, 166, 197);
+    border-radius: 10px;
+    padding: 5px;
+    margin-top: 5px;
+    z-index: -1;
+
+    transition-delay: 500ms;
+    box-shadow: 5px 5px 2.5px 0px rgba(0,0,0,0.75);
+}
+
+.post_date {
+    display: inline-block;
+    height: 20px;
+    margin: auto;
+}
+
+.post_username:hover {
+    color: rgb(43, 166, 197);
+    border-color: rgb(55, 55, 55);  
+}
+
+.post_username:hover + .post_userinfo {
+    z-index: 1;
+}
+
+.post_userinfo:hover {
+    z-index: 1;
+}
+
+.post_title {
+    display: block;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.post_content_footer {
+    margin: 0 25px 10px 25px;
+}
+
+.post_content {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.reactions {
+    display: inline-block;
+    font-size: 20px;
+}
+
+.reaction_count {
+    padding-right: 5px;
+    font-size: 18px;
+}
+
+.icon {
+    border-radius: 50px;
+    padding: 5px 7.5px;
+    margin-left: -7.5px;
+
+    transition-duration: 150ms;
+}
+
+.icon_clicked {
+    color: rgb(43, 166, 197);
+}
+
+.icon:hover {
+    background-color: rgba(0, 255, 255, 0.15);
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 1080px) { 
+    .side_bar_right {
+        right: 0;
+    }
+
+    .main_content {
+        flex-shrink: 1;
+    }
+}
+
+@media only screen and (max-width: 860px) {
+    .side_bar_right {
+        display: none;
+    }
+
+    .main_content {
+        width: calc(100vw - 220px);
+        margin-right: 0;
+    }
+}
+
+@media only screen and (max-width: 699px) { /* 640px + 22px + 15px * 2px */
+    .side_bar_left {
+        min-width: 32px;    
+    }
+
+    .side_bar_item_text {
+        display: none;
+    }
+
+    .main_content {
+        width: calc(100vw - 52px);
+        margin-left: 52px; /* 22px + 15px * 2px */
+    }
+}
+
+/* TEMPORARY STUFF */
+
+.page_not_available {
+    margin-top: 15px;
+
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.page_redirect {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.page_redirect:hover {
+    color: rgb(43, 166, 197);
+}
+
+.error {
+    display: inline-block;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* TEMPORARY STUFF */

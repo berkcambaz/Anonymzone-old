@@ -1,0 +1,125 @@
+html, body {
+    width: 100vw;
+    height: 100vh;
+
+    margin: 0;
+    padding: 0;
+    outline: 0;
+
+    background-color: #ffffff;
+    font-family: "ubunturegular";
+    font-size: 16px;
+
+    display: flex;  
+    justify-content: center;
+    align-items: center;
+}
+
+@font-face {
+    font-family: 'ubunturegular';
+    font-weight: normal;
+    font-style: normal;
+    src: local("ubuntu"), url('fonts/ubuntu-r-webfont.eot');
+    src: local("ubuntu"), url('fonts/ubuntu-r-webfont.eot?#iefix') format('embedded-opentype'),
+         url('fonts/ubuntu-r-webfont.woff2') format('woff2'),
+         url('fonts/ubuntu-r-webfont.woff') format('woff'),
+         url('fonts/ubuntu-r-webfont.ttf') format('truetype'),
+         url('fonts/ubuntu-r-webfont.svg#ubunturegular') format('svg');
+}
+
+.no_select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.placeholder {
+    color: rgba(55, 55, 55, 0.25);
+}
+
+.wrap_text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.checkbox{
+  display: inline-block;
+  position: relative;
+  margin: 0;
+  top: 1px;
+}
+
+.login_panel {
+    width: 400px;   
+
+    background-color: #ebebf4;
+    border-radius: 50px;
+}
+
+.login_panel_container {
+    padding: 25px;
+}
+
+.login_panel_header {
+    font-size: 25px;    
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.login_panel_option {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.login_panel_error {
+    display: inline-block;
+    color: #ff0000;
+    font-weight: bold;
+}
+
+.login_panel_input {
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
+    /* Reset default properties of text input */
+    outline: 0;
+    border: 0;
+    resize: none;
+
+    font-family: "ubunturegular";
+    font-size: 16px;
+
+    border-bottom: 2px solid #ffffff;
+    background-color: #ebebf4;
+}
+
+.login_panel_input:hover {
+    border-color: rgb(43, 166, 197);
+    cursor: pointer;
+}
+
+.login_panel_input:focus {
+    border-color: rgb(43, 166, 197);
+}
+
+.login_panel_button {
+    text-align: center;
+    padding: 15px 0 15px 0;
+    margin-top: 25px;
+    border-radius: 50px;
+    background-color: rgba(0, 255, 255, 0.15);
+    color: rgb(43, 166, 197);
+}
+
+.login_panel_button:hover {
+    background-color: rgb(43, 166, 197);
+    color: #ffffff;
+    cursor: pointer;
+}

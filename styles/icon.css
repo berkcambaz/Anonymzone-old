@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "icons";
+  src: url("fonts/icons.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "icons" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "icons" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  /* */
+  display: inline-block;
+  position: relative;
+  top: 3px;
+  /* */
+}
+
+.icon-bookmark:before {
+  content: "\61";
+}
+.icon-bookmark-o:before {
+  content: "\62";
+}
+.icon-home:before {
+  content: "\63";
+}
+.icon-search:before {
+  content: "\65";
+}
+.icon-bell:before {
+  content: "\67";
+}
+.icon-user:before {
+  content: "\68";
+}
+.icon-compass:before {
+  content: "\69";
+}
+.icon-pencil-square:before {
+  content: "\6a";
+}
+.icon-paper-plane:before {
+  content: "\6b";
+}
+.icon-heart:before {
+  content: "\64";
+}
+.icon-heart-o:before {
+  content: "\66";
+}
