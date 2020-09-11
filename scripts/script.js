@@ -45,11 +45,35 @@ function reactionLike(elem) {
  * @param {HTMLElement} elem 
  */
 function reactionBookmark(elem) {
-    // TODO: Send request to server
-    if (elem.className === "icon icon-bookmark-o")
+    // TODO: Fix this piece of shit asap
+    let post_id = elem.parentElement.parentElement.parentElement.getElementsByClassName("post_id")[0].innerHTML;
+
+    let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = (function (elem) {
+        return function () {
+            if (this.readyState === 4 && this.status === 200) {
+                // TODO: Handle like counts from server with a modern way.
+                // To return the correct like amount, server has to send like 
+                // count back after increasing or decreasing it by 1
+                if (this.responseText === "1") {
+                    // Unliked -> liked
+                } else if (this.responseText === "0") {
+                    // Liked -> unliked
+                }
+            }
+        }
+    })(elem);
+    ajax.open("GET", "../services/postbookmark.php?post_id=" + post_id, true);
+    ajax.send();
+
+    if (elem.className === "icon icon-bookmark-o") {
+        // TODO: Tidy up
         elem.className = "icon icon_clicked icon-bookmark";
-    else
+    }
+    else {
+        // TODO: Tidy up
         elem.className = "icon icon-bookmark-o";
+    }
 }
 
 function post() {
@@ -91,7 +115,7 @@ function getPost() {
         if (this.readyState === 4 && this.status === 200) {
             let response = this.responseText.split("&");
             let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
-            for (let i = 0; i < responseLength; i += 7) {   // 6 -> number of properties of a post
+            for (let i = 0; i < responseLength; i += 8) {   // 8 -> number of properties of a post
                 let post = [
                     response[i + 1],
                     response[i],
@@ -100,7 +124,7 @@ function getPost() {
                     response[i + 4],
                     response[i + 5],
                     response[i + 6],
-                    false   // TODO: Fix
+                    response[i + 7]
                 ];
                 injectPost(post, true);
                 lastestPostId = parseInt(response[i]);

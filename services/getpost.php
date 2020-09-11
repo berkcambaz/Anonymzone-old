@@ -16,9 +16,17 @@ if (!empty($lastest_post_id)) {
         $sql = "SELECT user_name FROM user WHERE user_id='" . $row[1] . "'";
         $user = $db->query($sql)->fetch_assoc();
 
-        // TODO: Get the post_like from user_id and post_id 
+        // Get the post_like from user_id and post_id 
+        $sql = "SELECT * FROM post_like WHERE post_id='" . $row[0] . "' AND user_id='" . $row[1] . "'";
+        $like = $db->query($sql);
+        $post_liked = $like->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"]  . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&";
+        // Get the post_bookmarked from user_id and post_id
+        $sql = "SELECT * FROM post_bookmark WHERE post_id='" . $row[0] . "' AND user_id='" . $row[1] . "'";
+        $bookmark = $db->query($sql);
+        $post_bookmarked = $bookmark->num_rows === 1;
+
+        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
     }
 } else {
     // Query for the first time, so query maximum 5 posts if available
@@ -30,11 +38,16 @@ if (!empty($lastest_post_id)) {
         $sql = "SELECT user_name FROM user WHERE user_id='" . $row[1] . "'";
         $user = $db->query($sql)->fetch_assoc();
 
-        // TODO: Get the post_like from user_id and post_id 
+        // Get the post_like from user_id and post_id 
         $sql = "SELECT * FROM post_like WHERE post_id='" . $row[0] . "' AND user_id='" . $row[1] . "'";
         $like = $db->query($sql);
         $post_liked = $like->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&";
+        // Get the post_bookmarked from user_id and post_id
+        $sql = "SELECT * FROM post_bookmark WHERE post_id='" . $row[0] . "' AND user_id='" . $row[1] . "'";
+        $bookmark = $db->query($sql);
+        $post_bookmarked = $bookmark->num_rows === 1;
+
+        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
     }
 }
