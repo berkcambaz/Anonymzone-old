@@ -1,6 +1,6 @@
 html, body {
     max-width: 1080px;
-    height: 100vh;
+    height: 100%;
 
     margin: auto;
     padding: 0;
@@ -288,7 +288,7 @@ div {
     }
 
     .main_content {
-        width: calc(100vw - 220px);
+        width: calc(100% - 220px);
         margin-right: 0;
     }
 }
@@ -303,7 +303,7 @@ div {
     }
 
     .main_content {
-        width: calc(100vw - 52px);
+        width: calc(100% - 52px);
         margin-left: 52px; /* 22px + 15px * 2px */
     }
 }

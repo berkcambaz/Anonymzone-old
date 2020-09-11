@@ -89,7 +89,6 @@ function getPost() {
     let ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
-            console.log(this.responseText);
             let response = this.responseText.split("&");
             let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
             for (let i = 0; i < responseLength; i += 6) {   // 6 -> number of properties of a post
@@ -104,10 +103,15 @@ function getPost() {
                     false   // TODO: Fix
                 ];
                 injectPost(post);
+                lastestPostId = parseInt(response[i]);
             }
+            // If the page doesn't have enough content to fill, send another request
+            //if (window.scrollY === 0 && responseLength !== 0) {
+            //    getPost();
+            //}
         }
     };
-    ajax.open("GET", "../services/getpost.php", true);
+    ajax.open("GET", "../services/getpost.php?lastest_post_id=" + (lastestPostId ? lastestPostId : 0), true);
     ajax.send();
 }
 
@@ -121,6 +125,17 @@ function changePage(page) {
 
 // Request posts when the page is fully loaded
 document.addEventListener("DOMContentLoaded", () => { getPost(); }, false);
+
+window.addEventListener("scroll", () => {
+    // If scrolled to bottom, request for new posts
+    if (document.body.scrollHeight === window.scrollY + document.body.clientHeight) {
+        getPost();
+    }
+});
+
+// Please, surround this variable inside a class
+let lastestPostId;
+
 
 /*
 function applyPasteRestrict() {
