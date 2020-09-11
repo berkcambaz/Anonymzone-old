@@ -31,7 +31,10 @@ if (!empty($lastest_post_id)) {
         $user = $db->query($sql)->fetch_assoc();
 
         // TODO: Get the post_like from user_id and post_id 
+        $sql = "SELECT * FROM post_like WHERE post_id='" . $row[0] . "' AND user_id='" . $row[1] . "'";
+        $like = $db->query($sql);
+        $post_liked = $like->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&";
+        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&";
     }
 }

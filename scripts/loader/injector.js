@@ -47,8 +47,8 @@ let postPropertyCount = 8;
 
 function injectPost(post, insertAtBottom) {
     post[5] = clampCount(post[5]);
-    post[6] = post[6] ? "" : "-o";  // post_liked
-    post[7] = post[7] ? "" : "-o";  // post_bookmarked
+    post[6] = post[6] ? " icon_clicked" : "-o";  // post_liked
+    post[7] = post[7] ? " icon_clicked" : "-o";  // post_bookmarked
 
     let postText = "";
     for (let i = 0; i < postPropertyCount; ++i)

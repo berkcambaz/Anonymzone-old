@@ -70,8 +70,8 @@ function post() {
                     document.getElementById("post_title").value,
                     document.getElementById("post_content").value,
                     0,
-                    false,  // TODO: Fix
-                    false   // TODO: Fix
+                    false,  // Post is not liked when it comes out first
+                    false   // Post is not bookmarked when it comes out first
                 ];
 
                 document.getElementById("post_title").value = "";
@@ -91,7 +91,7 @@ function getPost() {
         if (this.readyState === 4 && this.status === 200) {
             let response = this.responseText.split("&");
             let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
-            for (let i = 0; i < responseLength; i += 6) {   // 6 -> number of properties of a post
+            for (let i = 0; i < responseLength; i += 7) {   // 6 -> number of properties of a post
                 let post = [
                     response[i + 1],
                     response[i],
@@ -99,7 +99,7 @@ function getPost() {
                     response[i + 3],
                     response[i + 4],
                     response[i + 5],
-                    false,  // TODO: Fix
+                    response[i + 6],
                     false   // TODO: Fix
                 ];
                 injectPost(post, true);
