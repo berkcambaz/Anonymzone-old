@@ -45,8 +45,8 @@ let postTemplate = [
 
 let postPropertyCount = 8;
 
-function injectPost(post) {
-    // TODO: Re-write number of likes according to its count. For example: 1.000.000 -> "1m"
+function injectPost(post, insertAtBottom) {
+    post[5] = clampCount(post[5]);
     post[6] = post[6] ? "" : "-o";  // post_liked
     post[7] = post[7] ? "" : "-o";  // post_bookmarked
 
@@ -55,8 +55,13 @@ function injectPost(post) {
         postText += postTemplate[i] + post[i];
     postText += postTemplate[postPropertyCount];
 
-    // Insert the new post at the top of the post container
-    document.getElementById("post_container").insertAdjacentHTML("afterbegin", postText);
+    if (insertAtBottom) {
+        // Insert the new post at the bottom of the post container
+        document.getElementById("post_container").insertAdjacentHTML("beforeend", postText);
+    } else {
+        // Insert the new post at the top of the post container
+        document.getElementById("post_container").insertAdjacentHTML("afterbegin", postText);
+    }
 }
 
 /**

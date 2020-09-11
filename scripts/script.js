@@ -77,7 +77,7 @@ function post() {
                 document.getElementById("post_title").value = "";
                 document.getElementById("post_content").value = "";
 
-                injectPost(post);
+                injectPost(post, false);
             }
         }
     };
@@ -102,7 +102,7 @@ function getPost() {
                     false,  // TODO: Fix
                     false   // TODO: Fix
                 ];
-                injectPost(post);
+                injectPost(post, true);
                 lastestPostId = parseInt(response[i]);
             }
             // If the page doesn't have enough content to fill, send another request
