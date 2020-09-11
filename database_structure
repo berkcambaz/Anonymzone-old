@@ -15,5 +15,6 @@ post_id int(11) PRIMARY
 user_id int(11)
 
 --- user --- 
+user_id int(11) PRIMARY AUTO_INCREMENT
 user_name varchar(16) utf8mb4_unicode_ci
 created_at timestamp
