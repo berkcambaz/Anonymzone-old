@@ -54,7 +54,7 @@ html, body {
 .login_panel {
     width: 400px;   
 
-    background-color: #ebebf4;
+    background-color: #ccfff8;
     border-radius: 50px;
 }
 
@@ -97,7 +97,7 @@ html, body {
     font-size: 16px;
 
     border-bottom: 2px solid #ffffff;
-    background-color: #ebebf4;
+    background-color: #ccfff8;
 }
 
 .login_panel_input:hover {
@@ -114,7 +114,7 @@ html, body {
     padding: 15px 0 15px 0;
     margin-top: 25px;
     border-radius: 50px;
-    background-color: rgba(0, 255, 255, 0.15);
+    background-color: rgba(0, 255, 255, 0.25);
     color: rgb(43, 166, 197);
 }
 

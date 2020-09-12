@@ -10,7 +10,11 @@ if (!empty($_SESSION["username"])) {
     exit();
 }
 
+require("services/versioner.php");
+$v = new Versioner();
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
