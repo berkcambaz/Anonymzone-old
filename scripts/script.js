@@ -90,7 +90,7 @@ function post() {
                 let post = [
                     response[0],
                     response[1],
-                    new Date(response[2]),
+                    new Date(response[i + 2]),
                     document.getElementById("post_title").value,
                     document.getElementById("post_content").value,
                     0,
@@ -119,7 +119,7 @@ function getPost() {
                 let post = [
                     response[i + 1],
                     response[i],
-                    new Date(response[2]),
+                    new Date(response[i + 2]),
                     response[i + 3],
                     response[i + 4],
                     response[i + 5],
