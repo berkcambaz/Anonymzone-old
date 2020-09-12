@@ -82,10 +82,15 @@ $v = new Versioner();
     </div>
 
     <div class="side_bar side_bar_right">
-        <div class="profile_info_box">
+        <div class="side_bar_item_container side_bar_left_item_container">
             <ul class="profile_info">
-                <li class="profile_info_text"><?php echo $_SESSION["username"]; ?></li>
-                <!--<li class="profile_info_text">@user_id</li>-->
+                <li class="profile_info_item" onclick="showDropdown(this)">
+                    <span class="profile_info_username"><?php echo $_SESSION["username"]; ?></span>
+                    <span class="profile_info_icon icon-angle-down"></span>
+                </li>
+                <li class="profile_info_logout" id="logout" onclick="logout()">
+                    Log out
+                </li>
             </ul>
 
             <ul class="trending_posts">

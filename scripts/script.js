@@ -139,6 +139,17 @@ function getPost() {
     ajax.send();
 }
 
+function logout() {
+    let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            window.location = this.responseText;
+        }
+    };
+    ajax.open("GET", "../services/logout.php", true);
+    ajax.send();
+}
+
 /**
  * 
  * @param {string} page 
@@ -160,6 +171,14 @@ window.addEventListener("scroll", () => {
 // Please, surround this variable inside a class
 let lastestPostId;
 
+/**
+ * 
+ * @param {HTMLElement} elem 
+ */
+function showDropdown(elem) {
+    elem.classList.toggle("profile_info_item-clicked");
+    document.getElementById("logout").classList.toggle("profile_info_logout-visible");
+}
 
 /*
 function applyPasteRestrict() {

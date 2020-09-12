@@ -13,6 +13,14 @@ html, body {
     display: flex;  
 }
 
+*:focus {
+    outline: none;
+}
+
+div {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 @font-face {
     font-family: 'ubunturegular';
     font-weight: normal;
@@ -25,11 +33,48 @@ html, body {
          url('fonts/ubuntu-r-webfont.svg#ubunturegular') format('svg');
 }
 
+/* --- UTILITY CLASSES --- */
+
 .wrap_text {
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
 }
+ 
+.input_text {
+    width: 100%;
+
+    resize: none;
+    color: #000000;
+    overflow-wrap: break-word;
+
+    font-family: "ubunturegular";   /* Because by default, textarea has a different font-family */
+
+    /* Reset default properties of text input */
+    outline: 0;
+    border: 0;
+
+    font-size: 16px;
+}
+
+.placeholder {
+    color: rgba(55, 55, 55, 0.25);
+}
+
+.wrap_text {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+.no_select {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* --- UTILITY CLASSES --- */
 
 .side_bar {
     min-width: 190px; /* -15px * 2px */
@@ -81,7 +126,7 @@ html, body {
     background-color: rgba(0, 255, 255, 0.25);
 }
 
-.profile_info_box {
+.side_bar_left_item_container {
     display: block;
     padding: 7.5px 0;
 }
@@ -89,10 +134,56 @@ html, body {
 .profile_info {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
-.profile_info_text {
-    padding: 3.75px 0;
+.profile_info_item {
+    display: flex;
+    flex-direction: row;
+
+    transition-duration: 150ms;
+
+    padding: 16px 0;
+    border-radius: 50px;
+
+    cursor: pointer;
+}
+
+.profile_info_item:hover {
+    background-color: rgba(0, 255, 255, 0.25);
+}
+
+.profile_info_item-clicked {
+    border-radius: 0;
+}
+
+.profile_info_username {
+    width: 75%; 
+    display: inline-block; 
+    padding-left: 15px;
+}
+
+.profile_info_icon {
+    width: 25%; 
+    display: inline-block; 
+    padding: 0; 
+    margin: 0; 
+    text-align: center;
+}
+
+.profile_info_logout {
+    position: absolute;
+    display: none;
+    width: calc(100% - 30px);
+    padding: 8px 0 8px 15px;
+
+    background-color: rgba(0, 255, 255, 0.25);
+
+    cursor: pointer;
+}
+
+.profile_info_logout-visible {
+    display: inline;
 }
 
 .trending_posts {
@@ -119,55 +210,14 @@ html, body {
     color: rgb(43, 166, 197);
     cursor: pointer;
 }
- 
-.input_text {
-    width: 100%;
-
-    resize: none;
-    color: #000000;
-    overflow-wrap: break-word;
-
-    font-family: "ubunturegular";   /* Because by default, textarea has a different font-family */
-
-    /* Reset default properties of text input */
-    outline: 0;
-    border: 0;
-
-    font-size: 16px;
-}
 
 .main_content { 
     width: calc(100vw - 440px); /* 440px = 220px * 2px */
     margin: 0 220px;
 }
 
-.placeholder {
-    color: rgba(55, 55, 55, 0.25);
-}
-
-.wrap_text {
-    overflow-wrap: break-word;
-    word-wrap: break-word;
-    word-break: break-word;
-}
-
-.no_select {
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-*:focus {
-    outline: none;
-}
-
-div {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
 .page_header {
-    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+    border-bottom: 1px solid #000000;
     margin-top: 10px;
     font-size: 20px;
     text-transform: capitalize;
@@ -179,11 +229,11 @@ div {
 
 .post {
     padding: 5px;
-    border-bottom: 1px solid rgba(95, 24, 24, 0.25);
+    border-bottom: 1px solid #000000;
 }
 
 .post_create {
-    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+    border-bottom: 1px solid #000000;
 }
 
 .post_content_header {
@@ -194,7 +244,7 @@ div {
 .post_username {
     font-size: 18px;
     display: inline-block;
-    border-bottom: 1px solid rgba(55, 55, 55, 0.25);
+    border-bottom: 1px solid #000000;
     cursor: pointer;
 }
 
