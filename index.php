@@ -10,7 +10,8 @@ if (empty($_SESSION["username"])) {
     exit();
 }
 
-//session_destroy();
+require("services/versioner.php");
+$v = new Versioner();
 
 ?>
 
@@ -26,8 +27,8 @@ if (empty($_SESSION["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anonymzone</title>
 
-    <link rel="stylesheet" href="styles/main.css" type="text/css">
-    <link rel="stylesheet" href="styles/icon.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo $v->version("styles/main.css") ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo $v->version("styles/icon.css") ?>" type="text/css">
 </head>
 
 <body>
@@ -106,12 +107,12 @@ if (empty($_SESSION["username"])) {
     </div>
 
     <!-- Load scripts -->
-    <script src="scripts/script.js" type="text/javascript"></script>
-    <script src="scripts/util.js" type="text/javascript"></script>
-    <script src="scripts/loader/injector.js" type="text/javascript"></script>
-    <script src="scripts/spa/route.js" type="text/javascript"></script>
-    <script src="scripts/spa/router.js" type="text/javascript"></script>
-    <script src="scripts/spa/app.js" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/script.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/util.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/loader/injector.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/spa/route.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/spa/router.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/spa/app.js") ?>" type="text/javascript"></script>
     <!-- Load scripts -->
 </body>
 

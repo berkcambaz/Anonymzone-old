@@ -23,15 +23,15 @@ if (!empty($_SESSION["username"])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anonymzone</title>
 
-    <link rel="stylesheet" href="styles/login.css" type="text/css">
-    <link rel="stylesheet" href="styles/icon.css" type="text/css">
+    <link rel="stylesheet" href="<?php echo $v->version("styles/login.css") ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo $v->version("styles/icon.css") ?>" type="text/css">
 </head>
 
 <body>
 
     <!-- LOAD SCRIPT HERE -->
-    <script src="scripts/login.js" type="text/javascript"></script>
-    <script src="scripts/util.js" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/login.js") ?>" type="text/javascript"></script>
+    <script src="<?php echo $v->version("scripts/util.js") ?>" type="text/javascript"></script>
     <!-- LOAD SCRIPT HERE -->
 
     <div class="login_panel">
@@ -39,7 +39,6 @@ if (!empty($_SESSION["username"])) {
             <div class="login_panel_header">Anonymzone</div>
             <div class="login_panel_option">Username</div>
             <div class="login_panel_error error"></div>
-            <!--<input type="text" class="login_panel_input" id="username" spellcheck="false" autocomplete="false" placeholder="I want to be disguised as...">-->
             <textarea class="login_panel_input" id="username" oninput="sizeTextareaDynamic(this)" style="height: 19px;" spellcheck="false" autocomplete="false" placeholder="I want to be disguised as..."></textarea>
 
             <div class="login_panel_option">
