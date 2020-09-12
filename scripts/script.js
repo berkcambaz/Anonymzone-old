@@ -9,6 +9,15 @@ function reactionLike(elem) {
     let post_id = elem.parentElement.parentElement.parentElement.getElementsByClassName("post_id")[0].innerHTML;
 
     let ajax = new XMLHttpRequest();
+    ajax.onreadystatechange = function () {
+        if (this.readyState === 4 && this.status === 200) {
+            // TODO: Handle like counts from server with a modern way.
+            // To return the correct like amount, server has to send like 
+            // count back after increasing or decreasing it by 1
+            if (this.responseText === "1") {
+                // Unliked -> liked
+            } else if (this.responseText === "0") {
+                // Liked -> unliked
             }
         }
     };
