@@ -10,8 +10,8 @@ if (isset($useragreement) && $useragreement == "true") {
         echo "can not be empty&";
     } else {
         $usernameLength = strlen($username);
-        if ($usernameLength < 4 || $usernameLength > 16) {
-            echo "should be between 4-16 characters&";
+        if ($usernameLength < 3 || $usernameLength > 16) {
+            echo "should be between 3-16 characters&";
         } else {
             if (!preg_match("/^[a-z0-9]*$/", $username)) {
                 echo "can only contain a-z or 0-9&";
