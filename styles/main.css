@@ -78,7 +78,7 @@ html, body {
 }
 
 .side_bar_item:hover > .side_bar_item_container {
-    background-color: rgba(0, 255, 255, 0.15);
+    background-color: rgba(0, 255, 255, 0.25);
 }
 
 .profile_info_box {
@@ -268,7 +268,7 @@ div {
 }
 
 .icon:hover {
-    background-color: rgba(0, 255, 255, 0.15);
+    background-color: rgba(0, 255, 255, 0.25);
     cursor: pointer;
 }
 

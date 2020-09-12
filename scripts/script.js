@@ -119,7 +119,7 @@ function getPost() {
                 let post = [
                     response[i + 1],
                     response[i],
-                    response[i + 2],
+                    new Date(response[2]),
                     response[i + 3],
                     response[i + 4],
                     response[i + 5],
