@@ -28,13 +28,13 @@ function reactionLike(elem) {
         // TODO: Tidy up
         elem.className = "icon icon_clicked icon-heart";
         let likeCountElement = elem.parentElement.getElementsByClassName("reaction_count")[0];
-        likeCountElement.innerHTML = parseInt(likeCountElement.innerHTML) + 1;
+        likeCountElement.innerHTML = clampCount(parseInt(likeCountElement.innerHTML) + 1);
     }
     else {
         // TODO: Tidy up
         elem.className = "icon icon-heart-o";
         let likeCountElement = elem.parentElement.getElementsByClassName("reaction_count")[0];
-        likeCountElement.innerHTML = parseInt(likeCountElement.innerHTML) - 1;
+        likeCountElement.innerHTML = clampCount(parseInt(likeCountElement.innerHTML) - 1);
     }
 }
 
@@ -85,10 +85,12 @@ function post() {
             if (response.length === 2) {
                 document.getElementById("error").innerHTML = response[1];
             } else if (response.length === 3) {
+                let postDate = new Date(response[2]);
                 let post = [
                     response[0],
                     response[1],
-                    new Date(response[2]),
+                    postDate,
+                    postDate,
                     document.getElementById("post_title").value,
                     document.getElementById("post_content").value,
                     0,
@@ -114,10 +116,12 @@ function getPost() {
             let response = this.responseText.split("&");
             let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
             for (let i = 0; i < responseLength; i += 8) {   // 8 -> number of properties of a post
+                let postDate = new Date(response[i + 2]);
                 let post = [
                     response[i + 1],
                     response[i],
-                    new Date(response[i + 2]),
+                    postDate,
+                    postDate,
                     response[i + 3],
                     response[i + 4],
                     response[i + 5],
@@ -128,9 +132,9 @@ function getPost() {
                 lastestPostId = parseInt(response[i]);
             }
             // If the page doesn't have enough content to fill, send another request
-            //if (window.scrollY === 0 && responseLength !== 0) {
-            //    getPost();
-            //}
+            if (document.body.scrollHeight === document.body.clientHeight && responseLength !== 0) {
+                getPost();
+            }
         }
     };
     ajax.open("GET", "../services/getpost.php?lastest_post_id=" + (lastestPostId ? lastestPostId : 0), true);

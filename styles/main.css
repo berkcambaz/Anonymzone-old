@@ -154,6 +154,7 @@ div {
 }
 
 .profile_info_item-clicked {
+    background-color: rgba(0, 255, 255, 0.25);
     border-radius: 0;
 }
 
@@ -262,8 +263,12 @@ div {
 
 .post_date {
     display: inline-block;
-    height: 20px;
+    height: 19px;
     margin: auto;
+}
+
+.post_date:hover {
+    border-bottom: 1px solid #000000;
 }
 
 .post_username:hover {

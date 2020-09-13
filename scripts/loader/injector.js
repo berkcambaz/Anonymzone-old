@@ -1,12 +1,13 @@
 /* post template */
 // [0] -> user_name
 // [1] -> post_id
-// [2] -> post_date
-// [3] -> post_title
-// [4] -> post_content
-// [5] -> like_count
-// [6] -> post_liked
-// [7] -> post_bookmarked
+// [2] -> post_full_date
+// [3] -> post_date
+// [4] -> post_title
+// [5] -> post_content
+// [6] -> like_count
+// [7] -> post_liked
+// [8] -> post_bookmarked
 
 let postTemplate = [
     '<div class=" post">\
@@ -17,7 +18,9 @@ let postTemplate = [
             <div hidden class="post_id">',
 
     '</div>\
-            <div class="post_date">',
+            <div class="post_date" title="',
+
+    '">',
 
     '</div>\
         </div>\
@@ -43,12 +46,16 @@ let postTemplate = [
     </div>'
 ];
 
-let postPropertyCount = 8;
+let postPropertyCount = 9;
+
+let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function injectPost(post, insertAtBottom) {
-    post[5] = clampCount(post[5]);
-    post[6] = post[6] ? " icon_clicked" : "-o";  // post_liked
-    post[7] = post[7] ? " icon_clicked" : "-o";  // post_bookmarked
+    post[2] = getFullDate(post[2]);
+    post[3] = clampDate(post[3]);
+    post[6] = clampCount(post[6]);
+    post[7] = post[7] ? " icon_clicked" : "-o";  // post_liked
+    post[8] = post[8] ? " icon_clicked" : "-o";  // post_bookmarked
 
     let postText = "";
     for (let i = 0; i < postPropertyCount; ++i)
@@ -75,4 +82,37 @@ function clampCount(count) {
         return (count / 1000).toString() + "k";
     }
     return count;
+}
+
+/**
+ * 
+ * @param {Date} date 
+ */
+function clampDate(postDate) {
+    let currDate = new Date();
+
+    if (currDate.getFullYear() - postDate.getFullYear() > 0) {
+        return months[postDate.getMonth()] + " " + postDate.getDate() + ", " + postDate.getFullYear();
+    } else {
+        if (currDate.getMonth() - postDate.getMonth() > 0 || currDate.getDate() - postDate.getDate() > 0) {
+            return months[postDate.getMonth()] + " " + postDate.getDate();
+        } else if (currDate.getHours() - postDate.getHours() > 0) {
+            return currDate.getHours() - postDate.getHours() + "h";
+        } else if (currDate.getMinutes() - postDate.getMinutes() > 0) {
+            return currDate.getMinutes() - postDate.getMinutes() + "m";
+        } else {
+            return currDate.getSeconds() - postDate.getSeconds() + "s";
+        }
+    }
+}
+
+/**
+ * 
+ * @param {Date} postDate 
+ */
+function getFullDate(postDate) {
+    let hour = postDate.getHours();
+    let minute = postDate.getMinutes();
+
+    return (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute) + (hour < 12 ? " AM " : " PM ") + months[postDate.getMonth()] + " " + postDate.getDate() + ", " + postDate.getFullYear();
 }

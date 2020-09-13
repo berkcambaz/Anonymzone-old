@@ -5,11 +5,11 @@ session_start();
 require("database.php");
 $db = new Database();
 
-$lastest_post_id = $_GET["lastest_post_id"];
+$lastest_post_id = (int)$_GET["lastest_post_id"];
 
 if (!empty($lastest_post_id)) {
     // Query 
-    $sql = "SELECT * FROM post WHERE post_id <'" . $lastest_post_id . "' limit 1";
+    $sql = "SELECT * FROM post WHERE post_id <'" . $lastest_post_id . "' ORDER BY post_id DESC limit 1";
     $result = $db->query($sql);
 
     // Get the user id from database
