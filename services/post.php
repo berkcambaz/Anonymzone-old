@@ -23,7 +23,7 @@ if (!empty($post_title)) {
                 $result = $db->query($sql)->fetch_assoc();
 
                 $sql = "INSERT INTO post (user_id, created_at, post_title, post_content)
-                    VALUES ('" . $result["user_id"] . "', UTC_TIMESTAMP(), '" . $post_title . "', '" . $post_content . "')";
+                    VALUES ('" . $result["user_id"] . "', FROM_UNIXTIME(UNIX_TIMESTAMP()" . -90 . "), '" . $post_title . "', '" . $post_content . "')";
                 $db->query($sql);
 
                 $sql = "SELECT created_at, post_id FROM post WHERE post_id='" . $db->getConnection()->insert_id . "'";
