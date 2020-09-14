@@ -85,7 +85,7 @@ function post() {
             if (response.length === 2) {
                 document.getElementById("error").innerHTML = response[1];
             } else if (response.length === 3) {
-                let postDate = new Date(response[2]);
+                let postDate = new Date(response[2] * 1000);
                 let post = [
                     response[0],
                     response[1],
@@ -116,7 +116,7 @@ function getPost() {
             let response = this.responseText.split("&");
             let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
             for (let i = 0; i < responseLength; i += 8) {   // 8 -> number of properties of a post
-                let postDate = new Date(response[i + 2]);
+                let postDate = new Date(response[i + 2] * 1000);
                 let post = [
                     response[i + 1],
                     response[i],

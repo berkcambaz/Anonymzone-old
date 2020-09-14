@@ -27,7 +27,7 @@ if (isset($useragreement) && $useragreement == "true") {
                 // if not already created, create the account
                 if ($result->num_rows === 0) {
                     $sql = "INSERT INTO user (user_name, created_at)
-                    VALUES ('" . $username . "', FROM_UNIXTIME(UNIX_TIMESTAMP()" . -90 . "))";
+                    VALUES ('" . $username . "', UNIX_TIMESTAMP()" . -90 . ")";
                     $db->query($sql);
                 }
 

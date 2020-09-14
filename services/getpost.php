@@ -31,7 +31,7 @@ if (!empty($lastest_post_id)) {
         $bookmark = $db->query($sql);
         $post_bookmarked = $bookmark->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "Z" . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
     }
 } else {
     // Query for the first time, so query maximum 5 posts if available
@@ -57,6 +57,6 @@ if (!empty($lastest_post_id)) {
         $bookmark = $db->query($sql);
         $post_bookmarked = $bookmark->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "Z" . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
     }
 }
