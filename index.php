@@ -29,6 +29,7 @@ $v = new Versioner();
 
     <link rel="stylesheet" href="<?php echo $v->version("styles/main.css") ?>" type="text/css">
     <link rel="stylesheet" href="<?php echo $v->version("styles/icon.css") ?>" type="text/css">
+    <link rel="stylesheet" href="<?php echo $v->version("styles/loader.css") ?>" type="text/css">
 </head>
 
 <body>

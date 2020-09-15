@@ -71,6 +71,16 @@ function injectPost(post, insertAtBottom) {
     }
 }
 
+function injectStr(str, insertAtBottom) {
+    if (insertAtBottom) {
+        // Insert the string at the bottom of the app
+        document.getElementById("app").insertAdjacentHTML("beforeend", str);
+    } else {
+        // Insert the string at the top of the app
+        document.getElementById("app").insertAdjacentHTML("afterbegin", str);
+    }
+}
+
 /**
  * 
  * @param {number} count 

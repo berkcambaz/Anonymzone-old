@@ -118,11 +118,14 @@ function post() {
 }
 
 function getPost() {
+    injectStr(loadingIcon, true);
+
     let ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200 && this.responseText !== "") {
             let response = JSON.parse(this.responseText);
             let responseLength = response.length;
+            document.getElementById("loader").remove();
             for (let i = 0; i < responseLength; ++i) {
                 let postDate = new Date(response[i][2] * 1000);
                 let post = [
@@ -181,6 +184,7 @@ window.addEventListener("scroll", () => {
 
 // Please, surround this variable inside a class
 let lastestPostId;
+let loadingIcon = '<div class="loader_container" id="loader"><div class="loader"></div></div>';
 
 /**
  * 

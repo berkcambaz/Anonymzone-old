@@ -10,13 +10,16 @@ class Router {
 
         this.routes = routes;
         this.rootElem = document.getElementById("app");
+        this.preventHashchangeEvent = true; // Prevent first hashchange event from firing
         this.init();
     }
 
     init() {
         (function (scope, routes) {
             window.addEventListener("hashchange", function (e) {
-                scope.hasChanged(scope, routes);
+                if (!scope.preventHashchangeEvent)
+                    scope.hasChanged(scope, routes);
+                scope.preventHashchangeEvent = false;
             });
         })(this, this.routes);
 
@@ -36,11 +39,13 @@ class Router {
                 if (route.isActiveRoute(currPage)) {
                     document.getElementById("page_header").innerHTML = route.name;
                     document.getElementById(route.name).classList.add("side_bar_item-active");
+                    this.rootElem.innerHTML = loadingIcon;
                     scope.goToRoute(route.file);
                 }
             }
         } else {    // If user has no current route, redirect user to "home" page
             window.location.hash = routes[0].name;  // Set current page to "home"
+            document.getElementById(routes[0].name).classList.add("side_bar_item-active");
             scope.goToRoute(routes[0].file);
         }
     }
