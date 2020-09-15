@@ -31,7 +31,8 @@ if (!empty($lastest_post_id)) {
         $bookmark = $db->query($sql);
         $post_bookmarked = $bookmark->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        //echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        echo json_encode(array(array($row[0], $user["user_name"], $row[2], htmlspecialchars($row[3]), htmlspecialchars($row[4]), $row[5], $post_liked, $post_bookmarked)));
     }
 } else {
     // Query for the first time, so query maximum 5 posts if available
@@ -41,6 +42,9 @@ if (!empty($lastest_post_id)) {
     // Get the user id from database
     $sql = "SELECT user_id FROM user WHERE user_name='" . $_SESSION["username"] . "'";
     $user_id = $db->query($sql)->fetch_array()[0];
+
+    $array;
+    $length = 0;
 
     while ($row = $result->fetch_row()) {
         // Get the user_name of the poster from user_id
@@ -57,6 +61,8 @@ if (!empty($lastest_post_id)) {
         $bookmark = $db->query($sql);
         $post_bookmarked = $bookmark->num_rows === 1;
 
-        echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        //echo $row[0] . "&" . $user["user_name"] . "&" . $row[2] . "&" . $row[3] . "&" . $row[4] . "&" . $row[5] . "&" . $post_liked . "&" . $post_bookmarked . "&";
+        $array[$length++] = array($row[0], $user["user_name"], $row[2], htmlspecialchars($row[3]), htmlspecialchars($row[4]), $row[5], $post_liked, $post_bookmarked);
     }
+    echo json_encode($array);
 }

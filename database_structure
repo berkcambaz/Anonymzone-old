@@ -1,7 +1,7 @@
 --- post ---
 post_id int(11) PRIMARY AUTO_INCREMENT
 user_id int(11) 
-created_at timestamp 
+created_at int(11)
 post_title varchar(64) utf8mb4_unicode_ci
 post_content varchar(256) utf8mb4_unicode_ci
 like_count int(11) DEFAULT(0)
@@ -17,10 +17,4 @@ user_id int(11)
 --- user --- 
 user_id int(11) PRIMARY AUTO_INCREMENT
 user_name varchar(16) utf8mb4_unicode_ci
-created_at timestamp
-
-Note : Use this command on sql to remove "extra onupdate current_timestamp()" from "created_at"
-ALTER TABLE tablename
-CHANGE created_at
-        created_at TIMESTAMP NOT NULL
-                       DEFAULT CURRENT_TIMESTAMP;
+created_at int(11)

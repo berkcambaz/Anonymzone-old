@@ -4,7 +4,7 @@
         <div class="post_content_footer">
             <textarea class="post_content input_text" id="post_content" oninput="sizeTextareaDynamic(this)" style="height: 19px;" spellcheck="false" autocomplete="false" placeholder="Write your thoughts..."></textarea>
             <div class="reactions">
-                <span class="icon icon-paper-plane" onclick="post()"></span>
+                <span class="icon icon-paper-plane" id="post_button" onclick="post()"></span>
             </div>
             <span class="error" id="error"></span>
         </div>
@@ -12,7 +12,7 @@
 
     <div id="post_container">
 
-        <!--<div class=" post">
+        <!--<div class="post">
             <div class="post_content_header">
                 <div class="post_username">Berk Cambaz</div>
                 <div hidden class="post_id"></div>

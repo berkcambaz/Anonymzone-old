@@ -75,36 +75,44 @@ function reactionBookmark(elem) {
 }
 
 function post() {
+    document.getElementById("post_button").attributes.getNamedItem("onclick").value = "";
     let postTitle = document.getElementById("post_title").value;
     let postContent = document.getElementById("post_content").value;
 
     let ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            let response = this.responseText.split("&");
-            if (response.length === 2) {
-                document.getElementById("error").innerHTML = response[1];
-            } else if (response.length === 3) {
+    ajax.onreadystatechange = (function (postTitle, postContent) {
+        return function () {
+            if (this.readyState === 4 && this.status === 200) {
+                let response;
+                try {
+                    response = JSON.parse(this.responseText);
+                } catch (e) {
+                    response = this.responseText;
+                    document.getElementById("error").innerHTML = response;
+                    document.getElementById("post_button").attributes.getNamedItem("onclick").value = "post()";
+                    return;
+                }
+
+                document.getElementById("post_title").value = "";
+                document.getElementById("post_content").value = "";
+
                 let postDate = new Date(response[2] * 1000);
                 let post = [
                     response[0],
                     response[1],
                     postDate,
                     postDate,
-                    document.getElementById("post_title").value,
-                    document.getElementById("post_content").value,
+                    postTitle,
+                    postContent,
                     0,
                     false,  // Post is not liked when it comes out first
                     false   // Post is not bookmarked when it comes out first
                 ];
-
-                document.getElementById("post_title").value = "";
-                document.getElementById("post_content").value = "";
-
                 injectPost(post, false);
+                document.getElementById("post_button").attributes.getNamedItem("onclick").value = "post()";
             }
         }
-    };
+    }(postTitle, postContent));
     ajax.open("GET", "../services/post.php?post_title=" + postTitle + "&post_content=" + postContent, true);
     ajax.send();
 }
@@ -112,25 +120,26 @@ function post() {
 function getPost() {
     let ajax = new XMLHttpRequest();
     ajax.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status === 200) {
-            let response = this.responseText.split("&");
-            let responseLength = response.length - 1;   // Subtract 1, because last element is a garbage(undefined)
-            for (let i = 0; i < responseLength; i += 8) {   // 8 -> number of properties of a post
-                let postDate = new Date(response[i + 2] * 1000);
+        if (this.readyState === 4 && this.status === 200 && this.responseText !== "") {
+            let response = JSON.parse(this.responseText);
+            let responseLength = response.length;
+            for (let i = 0; i < responseLength; ++i) {
+                let postDate = new Date(response[i][2] * 1000);
                 let post = [
-                    response[i + 1],
-                    response[i],
+                    response[i][1],
+                    response[i][0],
                     postDate,
                     postDate,
-                    response[i + 3],
-                    response[i + 4],
-                    response[i + 5],
-                    response[i + 6],
-                    response[i + 7]
+                    response[i][3],
+                    response[i][4],
+                    response[i][5],
+                    response[i][6],
+                    response[i][7]
                 ];
                 injectPost(post, true);
-                lastestPostId = parseInt(response[i]);
+                lastestPostId = parseInt(response[i][0]);
             }
+
             // If the page doesn't have enough content to fill, send another request
             if (document.body.scrollHeight === document.body.clientHeight && responseLength !== 0) {
                 getPost();
@@ -161,7 +170,7 @@ function changePage(page) {
 }
 
 // Request posts when the page is fully loaded
-document.addEventListener("DOMContentLoaded", () => { getPost(); }, false);
+//document.addEventListener("DOMContentLoaded", () => { getPost(); }, false);
 
 window.addEventListener("scroll", () => {
     // If scrolled to bottom, request for new posts

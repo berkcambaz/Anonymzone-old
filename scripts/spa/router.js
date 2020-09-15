@@ -52,6 +52,12 @@ class Router {
             ajax.onreadystatechange = function () {
                 if (this.readyState === 4 && this.status === 200) {
                     scope.rootElem.innerHTML = this.responseText;
+
+                    // Request posts when the page is fully loaded
+                    if (file === "home.php") {
+                        lastestPostId = 0;
+                        getPost();
+                    }
                 }
             };
             ajax.open("GET", url, true);

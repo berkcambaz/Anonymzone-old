@@ -8,12 +8,12 @@ $post_content = $_GET["post_content"];
 if (!empty($post_title)) {
     if (strlen($post_title) > 64) {
         // Error: Title can not have more than 64 characters.
-        echo "&Title can not have more than 64 characters";
+        echo "Title can not have more than 64 characters";
     } else {
         if (!empty($post_content)) {
             if (strlen($post_content) > 256) {
                 // Error: Content can not have more than 256 characters.
-                echo "&Your thoughts can not have more than 256 characters";
+                echo "Your thoughts can not have more than 256 characters";
             } else {
                 // If there are no errors
                 require("database.php");
@@ -29,14 +29,15 @@ if (!empty($post_title)) {
                 $sql = "SELECT created_at, post_id FROM post WHERE post_id='" . $db->getConnection()->insert_id . "'";
                 $result = $db->query($sql)->fetch_assoc();
 
-                echo $_SESSION["username"] . "&" . $result["post_id"] . "&" . $result["created_at"] . "Z";
+                //echo $_SESSION["username"] . "&" . $result["post_id"] . "&" . $result["created_at"];
+                echo json_encode(array($_SESSION["username"], $result["post_id"], $result["created_at"]));
             }
         } else {
             // Error: Content can not be empty.
-            echo "&Your thoughts can not be empty";
+            echo "Your thoughts can not be empty";
         }
     }
 } else {
     // Error: Title can not be empty.
-    echo "&Title can not be empty";
+    echo "Title can not be empty";
 }

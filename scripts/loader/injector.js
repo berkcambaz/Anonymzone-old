@@ -90,19 +90,23 @@ function clampCount(count) {
  */
 function clampDate(postDate) {
     let currDate = new Date();
+    let dateDiff = Math.abs(currDate - postDate);
 
-    if (currDate.getFullYear() - postDate.getFullYear() > 0) {
+    if (Math.floor(dateDiff /= 1000) < 60) {
+        // If seconds
+        return Math.floor(dateDiff) + "s";
+    } else if (Math.floor(dateDiff /= 60) < 60) {
+        // If minutes
+        return Math.floor(dateDiff) + "m";
+    } else if (Math.floor(dateDiff /= 60) < 24) {
+        // If hours
+        return Math.floor(dateDiff) + "h";
+    } else if (currDate.getFullYear() - postDate.getFullYear() > 0) {
+        // If years
         return months[postDate.getMonth()] + " " + postDate.getDate() + ", " + postDate.getFullYear();
     } else {
-        if (currDate.getMonth() - postDate.getMonth() > 0 || currDate.getDate() - postDate.getDate() > 0) {
-            return months[postDate.getMonth()] + " " + postDate.getDate();
-        } else if (currDate.getHours() - postDate.getHours() > 0) {
-            return currDate.getHours() - postDate.getHours() + "h";
-        } else if (currDate.getMinutes() - postDate.getMinutes() > 0) {
-            return currDate.getMinutes() - postDate.getMinutes() + "m";
-        } else {
-            return currDate.getSeconds() - postDate.getSeconds() + "s";
-        }
+        // If days or months
+        return months[postDate.getMonth()] + " " + postDate.getDate();
     }
 }
 
