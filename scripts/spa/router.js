@@ -10,7 +10,7 @@ class Router {
 
         this.routes = routes;
         this.rootElem = document.getElementById("app");
-        this.preventHashchangeEvent = true; // Prevent first hashchange event from firing
+        this.preventHashchangeEvent = false;
         this.init();
     }
 
@@ -44,6 +44,7 @@ class Router {
                 }
             }
         } else {    // If user has no current route, redirect user to "home" page
+            this.preventHashchangeEvent = true;       // Fixes requesting the home page twice when entered to website without #home hash
             window.location.hash = routes[0].name;  // Set current page to "home"
             document.getElementById(routes[0].name).classList.add("side_bar_item-active");
             scope.goToRoute(routes[0].file);

@@ -19,17 +19,16 @@ if (!empty($post_title)) {
                 require("database.php");
                 $db = new Database();
 
-                $sql = "SELECT user_id FROM user WHERE user_name='" . $_SESSION["username"] . "'";
-                $result = $db->query($sql)->fetch_assoc();
+                $sql = "SELECT user_id FROM user WHERE user_name=:user_name";
+                $user_id = $db->query($sql, array(":user_name" => $_SESSION["username"]))->fetch()[0];
 
                 $sql = "INSERT INTO post (user_id, created_at, post_title, post_content)
-                    VALUES ('" . $result["user_id"] . "', UNIX_TIMESTAMP()" . -90 . ", '" . $post_title . "', '" . $post_content . "')";
-                $db->query($sql);
+                VALUES (:user_id, UNIX_TIMESTAMP()-90, :post_title, :post_content)";
+                $db->query($sql, array(":user_id" => $user_id, ":post_title" => $post_title, ":post_content" => $post_content));
 
-                $sql = "SELECT created_at, post_id FROM post WHERE post_id='" . $db->getConnection()->insert_id . "'";
-                $result = $db->query($sql)->fetch_assoc();
+                $sql = "SELECT created_at, post_id FROM post WHERE post_id=:post_id";
+                $result = $db->query($sql, array(":post_id" => $db->getPDO()->lastInsertId()))->fetch(PDO::FETCH_ASSOC);
 
-                //echo $_SESSION["username"] . "&" . $result["post_id"] . "&" . $result["created_at"];
                 echo json_encode(array($_SESSION["username"], $result["post_id"], $result["created_at"]));
             }
         } else {

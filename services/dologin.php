@@ -20,15 +20,15 @@ if (isset($useragreement) && $useragreement == "true") {
                 $db = new Database();
 
                 // Get user_id from the entered username
-                $sql = "SELECT user_id FROM user WHERE user_name='" . $username . "'";
-                $result = $db->query($sql);
+                $sql = "SELECT * FROM user WHERE user_name=:username";
+                $stmt = $db->query($sql, array(":username" => $username));
 
                 // If a user_id is found, it means the account was already created,
                 // if not already created, create the account
-                if ($result->num_rows === 0) {
+                if ($stmt->rowCount() === 0) {
                     $sql = "INSERT INTO user (user_name, created_at)
-                    VALUES ('" . $username . "', UNIX_TIMESTAMP()" . -90 . ")";
-                    $db->query($sql);
+                    VALUES (:username, UNIX_TIMESTAMP()-90)";
+                    $db->query($sql, array(":username" => $username));
                 }
 
                 $_SESSION["username"] = $username;

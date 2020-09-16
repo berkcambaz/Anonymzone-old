@@ -7,27 +7,40 @@ class Database
     private $password = "u84iIora1rl";
     private $database = "epiz_26726797_anonymzone";
     private $connection;
+    private $pdo;
 
     public function __construct()
     {
-        $this->connection = mysqli_connect($this->host, $this->user, $this->password, $this->database);
-        if (!$this->connection) {
-            echo "Couldn't establish connection to server.<br>Error : " . mysqli_connect_error();
+        try {
+            $this->pdo = new PDO("mysql:host=$this->host;dbname=$this->database", $this->username, $this->password);
+            $this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Connected successfully
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+            // Connection failed
         }
     }
 
     public function __destruct()
     {
-        mysqli_close($this->connection);
+        $this->pdo = null;
     }
 
-    public function query($sql)
+    public function query($sql, $params = array())
     {
-        return mysqli_query($this->connection, $sql);
+        try {
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 
-    public function getConnection()
+    public function getPDO()
     {
-        return $this->connection;
+        return $this->pdo;
     }
 }

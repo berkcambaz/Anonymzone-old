@@ -6,6 +6,7 @@ function login() {
     ajax.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let error = this.responseText.split("&");
+            console.log(this.responseText);
 
             if (error.length == 2) {
                 let errorDisplay = document.getElementsByClassName("error");
@@ -13,7 +14,7 @@ function login() {
                 errorDisplay[0].innerHTML = error[0];
                 errorDisplay[1].style = error[1] ? "color: red;" : "";
             } else {
-                window.location = "../index.php";
+                window.location = "../";
             }
         }
     };
