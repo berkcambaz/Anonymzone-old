@@ -142,7 +142,7 @@ function getPost() {
             }
 
             // If the page doesn't have enough content to fill, send another request
-            if (document.body.scrollHeight !== document.body.clientHeight && responseLength !== 0) {
+            if (document.body.scrollHeight === document.body.clientHeight && responseLength !== 0) {
                 getPost();
             }
         }

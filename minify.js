@@ -1,4 +1,5 @@
 const querystring = require("querystring");
+const sleep = require("sleep");
 const https = require("https");
 const http = require("http");
 const fs = require("fs");
@@ -36,9 +37,11 @@ function processFile(path, file) {
     if (fileExtension === ".js") {
         extensionMatched = true;
         minifyJS(path, file);
+        sleep.msleep(250);
     } else if (fileExtension === ".css") {
         extensionMatched = true;
         minifyCSS(path, file);
+        sleep.msleep(250);
     }
 
     if (extensionMatched)
