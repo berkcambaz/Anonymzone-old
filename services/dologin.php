@@ -27,7 +27,7 @@ if (isset($useragreement) && $useragreement == "true") {
                 // if not already created, create the account
                 if ($stmt->rowCount() === 0) {
                     $sql = "INSERT INTO user (user_name, created_at)
-                    VALUES (:username, UNIX_TIMESTAMP()-90)";
+                    VALUES (:username, UNIX_TIMESTAMP())";
                     $db->query($sql, array(":username" => $username));
                 }
 

@@ -288,20 +288,13 @@ div {
     z-index: 1;
 }
 
-.post_title {
-    display: block;
-    margin: 10px 0;
-    font-size: 16px;
-    font-weight: bold;
-}
-
 .post_content_footer {
     margin: 0 25px 10px 25px;
 }
 
 .post_content {
     display: block;
-    margin-bottom: 10px;
+    margin: 8px 0;
 }
 
 .reactions {
@@ -329,6 +322,91 @@ div {
 .icon:hover {
     background-color: rgba(0, 255, 255, 0.25);
     cursor: pointer;
+}
+
+.search_bar {
+    display: flex;
+    align-items: center;
+
+    width: calc(100% - 32px); /* 16px * 2px = 32px */
+
+    margin: 16px;
+    padding: 2px 0;
+
+    border-radius: 50px;
+    border: 1px solid rgb(43, 166, 197);
+}
+
+.search_bar:hover {
+    background-color: rgba(0, 255, 255, 0.25);
+}
+
+.search_bar_text {
+    font-size: 18px;
+    margin-right: 12px;
+}
+
+.search_bar_icon {
+    margin: 0 6px 0 12px;
+    font-size: 22px;
+}
+
+.search_bar:hover > .search_bar_icon {
+    color: rgb(43, 166, 197);
+}
+
+.search_bar:hover > .search_bar_text {
+    /* Making this doesn't actually make search bar black, it becomes search_bar:hover's color */
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.search_bar-selected {
+    background-color: rgba(0, 255, 255, 0.25);
+}
+
+.search_bar_icon-selected {
+    color: rgb(43, 166, 197);
+}
+
+.search_bar_text-selected {
+    background-color: rgba(0, 255, 255, 0);
+}
+
+.search_bar_results {
+    display: block;
+    width: 100%;
+}
+
+.search_bar_result {
+    cursor: pointer;
+    padding: 8px 0 8px 16px;        
+    background-color: #ffffff;
+    border-top: 1px solid rgb(43, 166, 197);
+    border-bottom: 1px solid rgb(43, 166, 197);
+    margin-bottom: -1px;
+}
+
+.search_bar_result:hover {
+    /*color: #ffffff;*/
+    background-color: rgba(0, 255, 255, 0.25);
+}
+
+.profile_container {
+    border-bottom: 1px solid #000000;
+}
+
+.profile_username {
+    display: inline-block;
+    margin: 16px;
+
+    font-size: 20px;
+    font-weight: bold;
+
+    border-bottom: 1px solid #000000;
+}
+
+.profile_created_at{
+    padding: 16px;
 }
 
 @media only screen and (max-width: 1080px) { 
@@ -389,6 +467,13 @@ div {
     display: inline-block;
     color: #ff0000;
     font-weight: bold;
+}
+
+.couldnt_find {
+    font-size: 18px;
+    font-weight: bold;
+
+    margin: 36px;
 }
 
 /* TEMPORARY STUFF */

@@ -2,10 +2,10 @@
 
 class Database
 {
-    private $host = "sql313.epizy.com";
-    private $username = "epiz_26726797";
-    private $password = "u84iIora1rl";
-    private $database = "epiz_26726797_anonymzone";
+    private $host = "localhost";
+    private $username = "root";
+    private $password = "";
+    private $database = "anonymzone";
     private $pdo;
 
     public function __construct()

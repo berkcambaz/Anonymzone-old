@@ -60,7 +60,7 @@ $v = new Versioner();
                     <span class="side_bar_item_text">Bookmarks</span>
                 </span>
             </li>
-            <li class="side_bar_item" id="profile" onclick="changePage('profile')">
+            <li class="side_bar_item" id="profile" onclick="findProfile('<?php echo $_SESSION['username'] ?>')">
                 <span class="side_bar_item_container">
                     <span class="icon-user"></span>
                     <span class="side_bar_item_text">Profile</span>

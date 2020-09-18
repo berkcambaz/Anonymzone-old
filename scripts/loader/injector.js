@@ -3,16 +3,15 @@
 // [1] -> post_id
 // [2] -> post_full_date
 // [3] -> post_date
-// [4] -> post_title
-// [5] -> post_content
-// [6] -> like_count
-// [7] -> post_liked
-// [8] -> post_bookmarked
+// [4] -> post_content
+// [5] -> like_count
+// [6] -> post_liked
+// [7] -> post_bookmarked
 
 let postTemplate = [
     '<div class=" post">\
         <div class="post_content_header">\
-            <div class="post_username">',
+            <div class="post_username" onclick="findProfile(this.innerHTML)">',
 
     '</div>\
             <div hidden class="post_id">',
@@ -23,11 +22,7 @@ let postTemplate = [
     '">',
 
     '</div>\
-        </div>\
-        <div class="post_title wrap_text">',
-
-    '</div>\
-        <div class="post_content_footer">\
+        </div><div class="post_content_footer">\
             <div class="post_content wrap_text">',
 
     '</div>\
@@ -46,16 +41,45 @@ let postTemplate = [
     </div>'
 ];
 
-let postPropertyCount = 9;
+/* result template */
+// [0] -> user_name
+
+let resultTemplate = [
+    '<div class="search_bar_result" onclick="findProfile(this.innerHTML);">',
+
+    '</div>'
+];
+
+/* profile template */
+// [0] -> user_name
+// [1] -> created_at
+
+let profileTemplate = [
+    '<div class="profile_username">',
+
+    '</div>\
+    <div class="profile_created_at">Joined ',
+
+    '</div>'
+];
+
+let noprofileTemplate = [
+    "<div class='couldnt_find'>Couldn't find the profile..."
+];
+
+let postPropertyCount = 8;
+let resultPropertyCount = 1;
+let profilePropertyCount = 2;
+let noprofilePropertyCount = 1;
 
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function injectPost(post, insertAtBottom) {
     post[2] = getFullDate(post[2]);
     post[3] = clampDate(post[3]);
-    post[6] = clampCount(post[6]);
-    post[7] = post[7] ? " icon_clicked" : "-o";  // post_liked
-    post[8] = post[8] ? " icon_clicked" : "-o";  // post_bookmarked
+    post[5] = clampCount(post[5]);
+    post[6] = post[6] ? " icon_clicked" : "-o";  // post_liked
+    post[7] = post[7] ? " icon_clicked" : "-o";  // post_bookmarked
 
     let postText = "";
     for (let i = 0; i < postPropertyCount; ++i)
@@ -71,13 +95,61 @@ function injectPost(post, insertAtBottom) {
     }
 }
 
-function injectStr(str, insertAtBottom) {
+function injectResult(result, insertAtBottom) {
+    let resultText = "";
+    for (let i = 0; i < resultPropertyCount; ++i)
+        resultText += resultTemplate[i] + result[i];
+    resultText += resultTemplate[resultPropertyCount];
+
+    if (insertAtBottom) {
+        // Insert the new result at the bottom 
+        document.getElementById("search_bar_results").insertAdjacentHTML("beforeend", resultText);
+    } else {
+        // Insert the new result at the top 
+        document.getElementById("search_bar_results").insertAdjacentHTML("afterbegin", resultText);
+    }
+}
+
+function injectProfile(profile, insertAtBottom) {
+    profile[1] = getMonthYearDate(profile[1]);
+
+    let profileText = "";
+    for (let i = 0; i < profilePropertyCount; ++i)
+        profileText += profileTemplate[i] + profile[i];
+    profileText += profileTemplate[profilePropertyCount];
+
+    if (insertAtBottom) {
+        // Insert the new result at the bottom 
+        document.getElementById("profile_container").insertAdjacentHTML("beforeend", profileText);
+    } else {
+        // Insert the new result at the top 
+        document.getElementById("profile_container").insertAdjacentHTML("afterbegin", profileText);
+    }
+}
+
+function injectNoProfile(insertAtBottom) {
+    let noprofileText = noprofileTemplate[noprofilePropertyCount - 1];
+
+    if (insertAtBottom) {
+        // Insert the new result at the bottom 
+        document.getElementById("profile_container").insertAdjacentHTML("beforeend", noprofileText);
+    } else {
+        // Insert the new result at the top 
+        document.getElementById("profile_container").insertAdjacentHTML("afterbegin", noprofileText);
+    }
+}
+
+function injectStr(str, insertAtBottom, parentElem) {
+    // If no parent element entered, set the parent element as "app"
+    if (!parentElem)
+        parentElem = "app";
+
     if (insertAtBottom) {
         // Insert the string at the bottom of the app
-        document.getElementById("app").insertAdjacentHTML("beforeend", str);
+        document.getElementById(parentElem).insertAdjacentHTML("beforeend", str);
     } else {
         // Insert the string at the top of the app
-        document.getElementById("app").insertAdjacentHTML("afterbegin", str);
+        document.getElementById(parentElem).insertAdjacentHTML("afterbegin", str);
     }
 }
 
@@ -129,4 +201,12 @@ function getFullDate(postDate) {
     let minute = postDate.getMinutes();
 
     return (hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute) + (hour < 12 ? " AM " : " PM ") + months[postDate.getMonth()] + " " + postDate.getDate() + ", " + postDate.getFullYear();
+}
+
+/**
+ * 
+ * @param {Date} date 
+ */
+function getMonthYearDate(date) {
+    return months[date.getMonth()] + " " + date.getFullYear();
 }

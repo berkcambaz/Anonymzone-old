@@ -29,9 +29,9 @@ class Router {
     hasChanged(scope, routes) {
         if (window.location.hash.length > 0) {  // If user has a route
             let routeCount = routes.length;
+            let currPage = window.location.hash.substr(1).split("/")[0];
             for (let i = 0; i < routeCount; ++i) {
                 let route = routes[i];
-                let currPage = window.location.hash.substr(1);
 
                 // Clear all possible selected routes before, since if user enters to a new
                 // page with writing the new url, it can't remove active class from the old route
@@ -39,7 +39,7 @@ class Router {
                 if (route.isActiveRoute(currPage)) {
                     document.getElementById("page_header").innerHTML = route.name;
                     document.getElementById(route.name).classList.add("side_bar_item-active");
-                    this.rootElem.innerHTML = loadingIcon;
+                    addLoadingIcon();
                     scope.goToRoute(route.file);
                 }
             }
@@ -59,10 +59,23 @@ class Router {
                 if (this.readyState === 4 && this.status === 200) {
                     scope.rootElem.innerHTML = this.responseText;
 
-                    // Request posts when the page is fully loaded
-                    if (file === "home.php") {
-                        lastestPostId = 0;
-                        getPost();
+                    // Request posts when the home or bookmark page is fully loaded
+                    switch (file) {
+                        case "home.php":
+                            lastestPostId = 0;
+                            postType = 0;
+                            getPost();
+                            break;
+                        case "bookmarks.php":
+                            lastestPostId = 0;
+                            postType = 1;
+                            getPost();
+                            break;
+                        case "profile.php":
+                            lastestPostId = 0;
+                            postType = 2;
+                            getProfile(window.location.hash.substring(1).split("/")[1]);
+                            break;
                     }
                 }
             };

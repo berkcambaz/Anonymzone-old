@@ -2,7 +2,6 @@
 post_id int(11) PRIMARY AUTO_INCREMENT
 user_id int(11) 
 created_at int(11)
-post_title varchar(64) utf8mb4_unicode_ci
 post_content varchar(256) utf8mb4_unicode_ci
 like_count int(11) DEFAULT(0)
 
