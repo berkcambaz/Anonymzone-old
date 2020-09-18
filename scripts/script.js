@@ -74,11 +74,10 @@ function reactionBookmark(elem) {
 
 function post() {
     document.getElementById("post_button").attributes.getNamedItem("onclick").value = "";
-    let postTitle = document.getElementById("post_title").value;
     let postContent = document.getElementById("post_content").value;
 
     let ajax = new XMLHttpRequest();
-    ajax.onreadystatechange = (function (postTitle, postContent) {
+    ajax.onreadystatechange = (function (postContent) {
         return function () {
             if (this.readyState === 4 && this.status === 200) {
                 let response;
@@ -91,7 +90,6 @@ function post() {
                     return;
                 }
 
-                document.getElementById("post_title").value = "";
                 document.getElementById("post_content").value = "";
 
                 let postDate = new Date(response[2] * 1000);
@@ -100,7 +98,6 @@ function post() {
                     response[1],
                     postDate,
                     postDate,
-                    postTitle,
                     postContent,
                     0,
                     false,  // Post is not liked when it comes out first
@@ -110,8 +107,8 @@ function post() {
                 document.getElementById("post_button").attributes.getNamedItem("onclick").value = "post()";
             }
         }
-    }(postTitle, postContent));
-    ajax.open("GET", "../services/post.php?post_title=" + postTitle + "&post_content=" + postContent, true);
+    }(postContent));
+    ajax.open("GET", "../services/post.php?post_content=" + postContent, true);
     ajax.send();
 }
 

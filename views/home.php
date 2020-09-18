@@ -1,6 +1,5 @@
 <div class="post_container">
     <div class="post_create">
-        <textarea class="post_title input_text" id="post_title" oninput="sizeTextareaDynamic(this)" style="height: 19px;" spellcheck="false" autocomplete="false" placeholder="Title your thoughts..."></textarea>
         <div class="post_content_footer">
             <textarea class="post_content input_text" id="post_content" oninput="sizeTextareaDynamic(this)" style="height: 19px;" spellcheck="false" autocomplete="false" placeholder="Write your thoughts..."></textarea>
             <div class="reactions">

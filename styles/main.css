@@ -294,7 +294,7 @@ div {
 
 .post_content {
     display: block;
-    margin: 8px 0;
+    margin: 12px 0;
 }
 
 .reactions {
@@ -397,7 +397,7 @@ div {
 
 .profile_username {
     display: inline-block;
-    margin: 16px;
+    margin: 16px 8px;
 
     font-size: 20px;
     font-weight: bold;
@@ -406,7 +406,7 @@ div {
 }
 
 .profile_created_at{
-    padding: 16px;
+    padding: 16px 8px;
 }
 
 @media only screen and (max-width: 1080px) { 

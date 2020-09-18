@@ -2,7 +2,6 @@
 
 session_start();
 
-$post_title = $_GET["post_title"];
 $post_content = $_GET["post_content"];
 
 if (!empty($post_content)) {
@@ -18,7 +17,7 @@ if (!empty($post_content)) {
         $user_id = $db->query($sql, array(":user_name" => $_SESSION["username"]))->fetch()[0];
 
         $sql = "INSERT INTO post (user_id, created_at, post_content)
-                VALUES (:user_id, UNIX_TIMESTAMP(), :post_title, :post_content)";
+                VALUES (:user_id, UNIX_TIMESTAMP(), :post_content)";
         $db->query($sql, array(":user_id" => $user_id, ":post_content" => $post_content));
 
         $sql = "SELECT created_at, post_id FROM post WHERE post_id=:post_id";
